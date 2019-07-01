@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "rootDir": "./src_ts",
+    "outDir": "./dist",
+    // "watch": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "lib": ["es6"]
+  },
+  "include": [
+    "./src_ts/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
