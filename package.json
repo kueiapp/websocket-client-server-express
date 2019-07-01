@@ -5,7 +5,7 @@
   "main": "./build/index.js",
   "scripts": {
     "test": "node-dev -r esm ./dist/index.js",
-    "dev": "nodemon ./src_ts/index.ts",
+    "debug": "nodemon ./src_ts/index.ts",
     "build": "tsc"
   },
   "keywords": [

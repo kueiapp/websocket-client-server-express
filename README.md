@@ -1,4 +1,4 @@
-Build a RESTful API sample using Node.js in JavaScript and MySQL
+Build a RESTful API sample using Node.js in TypeScript and MySQL
 ============
 ## setup by the commands below #
 1. Installation from package.json
@@ -8,9 +8,9 @@ Build a RESTful API sample using Node.js in JavaScript and MySQL
 > npm run test
 * the script uses package node-dev to watch the code continoualy in modification
 3. Test the code in TypeScript
-> npm run dev
+> npm run debug
 * the script uses package nodemon to run TypeScript code directly
-4. Compile TypeScript to JavaScript
+4. Compile TypeScript to JavaScript using tsc
 > npm run build
 * you need to set up tsconfig.json of TypeScript first
 ------------
