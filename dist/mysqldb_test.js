@@ -1,25 +1,40 @@
 "use strict";
 /**
-* by kueiapp.com
-*/
+ * by kueiapp.com
+ */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
     return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // ES6
 var http = __importStar(require("http"));
 var fs = __importStar(require("fs"));
-var mysql = __importStar(require("mysql"));
+var mysql_1 = __importDefault(require("mysql"));
 var server = http.createServer(function (req, res) {
-    res.end('Hello Node!');
+    res.end("Hello Node!");
 });
 // default framework without Express
 http.createServer(function (request, response) {
-    fs.readFile(__dirname + '/public/manifest.json', function (err, file) {
+    fs.readFile(__dirname + "/public/manifest.json", function (err, file) {
         if (err) {
             response.writeHead(500);
             response.end("Error");
@@ -27,9 +42,9 @@ http.createServer(function (request, response) {
         }
         else {
             response.writeHead(200, {
-                "Content-Type": "application/json; charset=utf-8"
+                "Content-Type": "application/json; charset=utf-8",
             });
-            response.end(file, 'utf8');
+            response.end(file, "utf8");
         }
     });
 });
@@ -37,13 +52,14 @@ http.createServer(function (request, response) {
 //   console.log("listening to port 8000")
 // });
 // ES5 requires are workable
-var express = require('express');
-var bodyParser = require('body-parser');
+var express = require("express");
+var bodyParser = require("body-parser");
 // import * as express from 'express';
 // import * as bodyParser from 'body-parser';
 // Express
 var app = express();
-app.use(express.static(__dirname + '/public'));
+// static files
+app.use(express.static(__dirname + "/public"));
 // create application/json parser to support json encoded bodies
 var jsonParser = bodyParser.json();
 // create application/x-www-form-urlencoded parser
@@ -60,23 +76,24 @@ var MYSQL_USER = "root";
 var MYSQL_PASS = "1234";
 var MYSQL_DATABASE = "lifelab_nhk";
 /** URI */
-app.get('/mysql', function (res, resp) {
-    var connectionPool = mysql.createPool({
+app.get("/mysql", function (req, resp) {
+    var connectionPool = mysql_1.default.createPool({
+        // create connection
         connectionLimit: 10,
         host: MYSQL_HOST,
         user: MYSQL_USER,
         password: MYSQL_PASS,
-        database: MYSQL_DATABASE
+        database: MYSQL_DATABASE,
     });
     var resp2 = resp;
     // setup a connection
     connectionPool.getConnection(function (err, connection) {
         if (err) {
             resp2.send(err);
-            console.log('連線失敗！');
+            console.log("Connection failed！");
         }
         else {
-            resp2.send('連線成功！');
+            resp2.send("Connection successful");
             console.log(connection);
         }
     });

@@ -9,20 +9,21 @@ var insertArticle = function () {
 /*  Article GET 取得  */
 var selectArticle = function () {
     return new Promise(function (resolve, reject) {
+        // get from db.module
         db_module_1.default.getConnection(function (connectionError, connection) {
             if (connectionError) {
-                reject(connectionError); // 若連線有問題回傳錯誤
+                reject(connectionError);
             }
             else {
-                connection.query(// Article撈取所有欄位的值組
-                "SELECT * FROM news_list", function (error, result) {
+                connection.query("SELECT * FROM news_list", function (error, result) {
                     if (error) {
                         console.error('SQL error: ', error);
-                        reject(error); // 寫入資料庫有問題時回傳錯誤
+                        reject(error);
                     }
                     else {
-                        resolve(result); // 撈取成功回傳 JSON 資料
+                        resolve(result);
                     }
+                    // release memory
                     connection.release();
                 });
             }
