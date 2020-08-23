@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>WebSocket Echo Test</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script language="javascript" type="text/javascript">
+			var socketURI = "ws://localhost:3000";
+			const websocket = new WebSocket(socketURI);
+			// or addEventListener('open')
+			websocket.onopen = (evt) => {
+				console.log(
+					`client2 connected to a web socket: ${JSON.stringify(evt)}`
+				);
+			};
+			websocket.onclose = (evt) => {
+				console.warn(
+					`client2 disconnected from a web socket: ${JSON.stringify(evt)}`
+				);
+			};
+			websocket.onmessage = (evt) => {
+				console.log(`client2 got message: ${evt.data}`);
+			};
+			websocket.onerror = (evt) => {
+				console.error(`client2 got error: ${JSON.stringify(evt)}`);
+			};
+			function sendSocket(msg) {
+				websocket.send(`client2: ${msg}`);
+			}
+			function getAPI(msg) {
+				fetch("http://localhost:3000?name=" + msg).then(() => {
+					console.log(res);
+				});
+			}
+		</script>
+	</head>
+
+	<body>
+		<button onclick="getAPI('hello')">Get API</button>
+		<div id="output"></div>
+		<button onclick="sendSocket('hello')">Send msg</button>
+	</body>
+</html>

@@ -14,7 +14,6 @@ var express_1 = __importDefault(require("express"));
 var body_parser_1 = __importDefault(require("body-parser"));
 // Express
 var app = express_1.default();
-// morgan for debugging logs
 // create application/x-www-form-urlencoded parser
 app.use(body_parser_1.default.urlencoded({ extended: false })); // false:string, true:all types
 /** @remarks routes */
